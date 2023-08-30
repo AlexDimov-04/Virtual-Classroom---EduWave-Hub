@@ -3,9 +3,10 @@
 .alpackages/
 .snapshots/
 .output/
-*.app
+/django_env/
+TestResults.xml
 rad.json
+*.app
 *.g.xlf
 *.flf
-TestResults.xml
-/django_env/
+*.pyc
