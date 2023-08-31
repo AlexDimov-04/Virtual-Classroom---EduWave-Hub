@@ -1,9 +1,8 @@
-from django.urls import re_path
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    re_path('api/login/', views.LoginView.as_view(), name='sign_in'),
-    re_path('api/register/', views.RegisterView.as_view(), name='sign_up'),
-    re_path('login/', views.login_page, name='login'),
-    re_path('register/', views.register_page, name='register'),
+    path('register/', views.ApiRegisterUserView.as_view(), name='api_register_view'),
+    path('login/', views.ApiLoginUserView.as_view(), name='api_login_view'),
+    path('logout/', views.ApiLogoutUserView.as_view(), name='api_logout_view'),
 ]
