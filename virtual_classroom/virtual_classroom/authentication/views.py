@@ -1,27 +1,33 @@
-from virtual_classroom.authentication.serializers import RegisterUserSerializer
-from rest_framework.authtoken import views as api_auth_views
-from rest_framework import generics as api_views
-from rest_framework.response import Response
+from django.shortcuts import render
+from django.views import generic as views
+from virtual_classroom.authentication.forms import UserRegistrationForm
+from django.urls import reverse_lazy
+from virtual_classroom.authentication.models import CustomUserProfile
+from django.contrib import messages
 
 
-class ApiLoginUserView(api_auth_views.ObtainAuthToken):
-    pass
+class SignUpView(views.CreateView):
+    template_name = 'auth/register.html'
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.save()
 
-class ApiRegisterUserView(api_views.CreateAPIView):
-    serializer_class = RegisterUserSerializer
+        custom_user_profile = CustomUserProfile.objects.create(user=user)
+        custom_user_profile.email = form.cleaned_data.get('email')
+        custom_user_profile.save()
 
+        messages.success(
+            self.request, "User: " + user + " successfully created an account!"
+        )
 
-class ApiLogoutUserView(api_views.views.APIView):
-    def post(self, request, *args, **kwargs):
-        return self.__perform_logout(request)
+        return super().form_valid(form)
 
-    def get(self, request, *args, **kwargs):
-        return self.__perform_logout(request)
+        
 
-    @staticmethod
-    def __perform_logout(request):
-        request.user.auth_token.delete()
-        return Response({
-            'message': 'user logged out'
-        })
+   
+
+def login(request):
+    return render(request, 'auth/login.html')
