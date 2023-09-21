@@ -3,7 +3,7 @@
 .alpackages/
 .snapshots/
 .output/
-/django_env/
+django_venv/
 TestResults.xml
 rad.json
 *.app
