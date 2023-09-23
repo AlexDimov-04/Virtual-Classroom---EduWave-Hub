@@ -1,21 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="post" action="">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <br>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% extends 'core_auth/base_auth.html' %}
+ 
+{% block content %}
+    <div class="container">
+    <div class="screen">
+        {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div>
+                            <strong  style="font-size: 20px;">Success:</strong>
+                            <p style="font-size:18px;">
+                                {{ message }}<br>
+                            </p>
+                        </div>
+                    {% elif message.tags == 'info'%}
+                        <div>
+                            <strong  style="font-size: 20px;">Error:</strong>
+                            <p style="font-size:18px;">
+                                {{ message }}<br>
+                            </p>
+                        </div>
+                    {% endif %}
+            {% endfor %}
+        <div class="screen__content">
+        <form method="POST" class="login">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input
+                id="username"
+                name="username"
+                type="text"
+                class="login__input"
+                placeholder="User name / Email"
+            />
+            </div>
+            <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input id="password" name="password" type="password" class="login__input" placeholder="Password" />
+            </div>
+            <button class="button login__submit">
+            <span class="button__text">Log In Now</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+            </button>
+        </form>
+        <div class="social-login">
+            <h3>log in via</h3>
+            <div class="social-icons">
+            <a href="#" class="social-login__icon fab fa-instagram"></a>
+            <a href="#" class="social-login__icon fab fa-facebook"></a>
+            <a href="#" class="social-login__icon fab fa-twitter"></a>
+            </div>
+        </div>
+        </div>
+        <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+    </div>
+{% endblock %}
