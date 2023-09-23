@@ -1,8 +1,6 @@
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth import get_user_model
-
-UserModel = get_user_model()
+from django.contrib.auth.models import User
 
 class CustomUserProfile(models.Model):
     phone_regex = RegexValidator(
@@ -10,7 +8,7 @@ class CustomUserProfile(models.Model):
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
     )
 
-    user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     first_name = models.CharField(
         max_length=30,
