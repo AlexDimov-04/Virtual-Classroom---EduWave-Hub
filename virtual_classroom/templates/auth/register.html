@@ -1,20 +1,70 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html> -->
-
 {% extends 'core_auth/base_auth.html' %}
 
 {% block content %}
-    
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+        <form method="POST" class="login">
+            {% for message in messages %}
+                {% if message.tags == 'info'%}
+                    <div>
+                        <strong  style="font-size: 20px;">Error:</strong>
+                        <p style="font-size:18px;">
+                            {{ message }}<br>
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for field, error in form.errors.items %}
+                <div>
+                    <strong  style="font-size: 20px;">Error:</strong>
+                    <p style="font-size:18px;">
+                        {{ error|striptags }}<br>
+                    </p>
+                </div>
+            {% endfor %}
+            <h1>Register</h1>
+            {% csrf_token %}
+            <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            {{form.username}}
+            </div>
+            <div class="login__field">
+            <i class="login__icon fas fa-envelope"></i>
+            {{form.email}}
+            </div>
+            <div class="login__field">
+                <i class="login__icon fas fa-lock"></i>
+                {{form.password1}}
+            </div>
+            <div class="login__field">
+                <i class="login__icon fas fa-lock"></i>
+                {{form.password2}}
+            </div>
+            <button class="button login__submit">
+            <span class="button__text">Register</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+            </button>
+            <div class="wrapper">
+                <span style="color: #fff;">Already have an <br> account?</span>
+                <a style="color: rgb(85, 11, 85);" class="anchor" href="{% url 'login' %}"> <br> Sign in</a>
+            </div>
+        </form>
+        <div class="social-login">
+            <h3>Register via</h3>
+            <div class="social-icons">
+            <a href="#" class="social-login__icon fab fa-instagram"></a>
+            <a href="#" class="social-login__icon fab fa-facebook"></a>
+            <a href="#" class="social-login__icon fab fa-twitter"></a>
+            </div>
+        </div>
+        </div>
+        <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+    </div>
 {% endblock %}

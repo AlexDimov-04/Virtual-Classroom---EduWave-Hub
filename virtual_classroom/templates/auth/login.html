@@ -3,7 +3,10 @@
 {% block content %}
     <div class="container">
     <div class="screen">
-        {% for message in messages %}
+        <div class="screen__content">
+        <form method="POST" class="login">
+            {% csrf_token %}
+            {% for message in messages %}
                     {% if message.tags == 'success' %}
                         <div>
                             <strong  style="font-size: 20px;">Success:</strong>
@@ -20,9 +23,6 @@
                         </div>
                     {% endif %}
             {% endfor %}
-        <div class="screen__content">
-        <form method="POST" class="login">
-            {% csrf_token %}
             <h1>Login</h1>
             <div class="login__field">
             <i class="login__icon fas fa-user"></i>
@@ -39,12 +39,19 @@
             <input id="password" name="password" type="password" class="login__input" placeholder="Password" />
             </div>
             <button class="button login__submit">
-            <span class="button__text">Log In Now</span>
+            <span class="button__text">Log in</span>
             <i class="button__icon fas fa-chevron-right"></i>
             </button>
+            <div class="wrapper">
+                <a class="anchor" href="{% url 'reset_password' %}">Forgot your password?</a>
+            </div>
+            <div class="wrapper">
+                <span>Don't have an <br> account?</span>
+                <a class="anchor" href="{% url 'register' %}"> <br> Sign up</a>
+            </div>
         </form>
         <div class="social-login">
-            <h3>log in via</h3>
+            <h3>Log in via</h3>
             <div class="social-icons">
             <a href="#" class="social-login__icon fab fa-instagram"></a>
             <a href="#" class="social-login__icon fab fa-facebook"></a>
