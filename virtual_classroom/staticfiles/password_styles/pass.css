@@ -15,11 +15,11 @@ h1 {
   letter-spacing: -1px;
 }
 a {
-  color: #7b6fce;
-  text-decoration: unset;
+  color: #5a51ae;
+  text-decoration: underline;
+  font-weight: bold;
 }
 .login-root {
-  background: #fff;
   display: flex;
   width: 100%;
   min-height: 100vh;
