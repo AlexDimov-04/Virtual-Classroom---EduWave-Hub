@@ -8,9 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 
-def index(request):
-    return render(request, "auth/index.html")
-
 class SignUpView(views.CreateView):
     template_name = 'auth/register.html'
     form_class = UserRegistrationForm

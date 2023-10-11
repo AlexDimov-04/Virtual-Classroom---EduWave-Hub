@@ -1,5 +1,6 @@
 {% extends 'core_auth/base_auth.html' %}
- 
+{% load socialaccount %} 
+
 {% block content %}
     <div class="container">
     <div class="screen">
@@ -51,11 +52,10 @@
             </div>
         </form>
         <div class="social-login">
-            <h3>Log in via</h3>
+            <h3>Continue with</h3>
             <div class="social-icons">
-            <a href="#" class="social-login__icon fab fa-instagram"></a>
+            <a href="{% provider_login_url 'google' %}?next=/" class="google-register-button social-login__icon fab fa-google"></a>
             <a href="#" class="social-login__icon fab fa-facebook"></a>
-            <a href="#" class="social-login__icon fab fa-twitter"></a>
             </div>
         </div>
         </div>
